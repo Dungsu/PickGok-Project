@@ -1,0 +1,65 @@
+# --- Operating System ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Python (AI Server) ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Environment Variables
+.env
+.env.local
+
+# AI Model Files (Large files)
+pickgok-ai-server/models/*.index
+
+# --- Java / Eclipse (Web Server) ---
+*.class
+*.jar
+*.war
+*.zip
+*.tar.gz
+*.rar
+
+# Eclipse Config
+.metadata/
+.recommenders/
+.settings/
+.loadpath
+.externalToolBuilders/
+*.launch
+*.pydevproject
+.project
+.classpath
+
+# Build directories
+bin/
+build/
+out/
+target/
+
+# Gradle / Maven
+.gradle/
+!gradle-wrapper.jar
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.iml
+
+# --- Project Specific Data (IMPORTANT: Exclude Large Data) ---
+# FMA Music Files & Metadata
+pickgok-web-server/src/main/webapp/data/fma_small/
+pickgok-web-server/src/main/webapp/data/fma_metadata/
+
+# Logs
+*.log
+npm-debug.log*

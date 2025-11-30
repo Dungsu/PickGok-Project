@@ -1,0 +1,192 @@
+/* [MyPage Layout Fix] */
+
+/* 1. 전체 컨테이너: 중앙 정렬 및 최대 너비 확장 */
+.mypage-container {
+    width: 100%;
+    max-width: 1400px; /* 너비를 더 넓게 확보 (기존 1200px -> 1400px) */
+    margin: 0 auto;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+/* 헤더 스타일 */
+.mypage-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo-link img {
+    height: 45px;
+    width: auto;
+}
+
+.mypage-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+}
+
+/* 2. [핵심] 레이아웃 고정 (Flexbox) */
+.mypage-layout {
+    display: flex;
+    gap: 40px; /* 사이드바와 컨텐츠 사이 간격 */
+    align-items: flex-start;
+    min-height: 600px; /* 최소 높이 지정 (높이 흔들림 방지) */
+}
+
+/* 사이드바: 너비 고정 */
+.mypage-sidebar {
+    width: 240px; 
+    flex-shrink: 0; /* 화면이 줄어도 사이드바는 줄어들지 않음 */
+}
+
+/* 컨텐츠 영역: 남은 공간 꽉 채우기 */
+.mypage-content {
+    flex-grow: 1; /* 남은 공간을 모두 차지 */
+    width: 100%;  /* 내부 요소들이 꽉 차게 */
+    background-color: var(--bg-panel);
+    padding: 50px; /* 내부 여백을 넉넉하게 */
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-soft);
+}
+
+/* 3. 탭 버튼 스타일 */
+.tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 20px;
+    text-align: left;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+    background-color: var(--bg-element);
+    color: var(--text-main);
+}
+
+.tab-btn.active {
+    background-color: var(--primary-color);
+    color: #000;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+}
+
+/* 4. 내부 섹션 스타일 */
+.section {
+    display: none;
+    animation: fadeIn 0.3s ease-out;
+    width: 100%; /* 내용물 너비 100% */
+}
+.section.active { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--text-main);
+    border-left: 4px solid var(--primary-color);
+    padding-left: 15px;
+}
+
+.section p {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    padding-left: 19px;
+}
+
+/* 테마 카드 정렬 수정 */
+.theme-card {
+    display: grid; /* Flex 대신 Grid 사용으로 균등 분할 */
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 600px; /* 너무 넓어지지 않게 제한 */
+}
+
+.theme-option {
+    height: 150px;
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-element);
+    color: var(--text-muted);
+    transition: 0.3s;
+}
+
+.theme-option.active {
+    border-color: var(--primary-color);
+    background-color: rgba(46, 204, 113, 0.1);
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* 장르 그리드 */
+.genre-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개씩 고정 */
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.genre-btn {
+    padding: 18px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-element);
+    color: var(--text-muted);
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.genre-btn.selected {
+    background-color: var(--primary-color);
+    color: #000;
+    border-color: var(--primary-color);
+}
+
+/* 인풋 스타일 */
+input {
+    width: 100%;
+    padding: 14px;
+    background: var(--bg-element);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-radius: 8px;
+    margin-top: 5px;
+}
+
+.save-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+    color: #000;
+}
