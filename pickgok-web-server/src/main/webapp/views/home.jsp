@@ -2,34 +2,38 @@
 <%@ page import="com.pickgok.track.model.TrackDTO"%>
 <%@ page import="com.pickgok.user.model.UserDTO"%> 
 <%
-    // 1. 세션에서 로그인 유저 정보 가져오기 (Scope 확보)
+    // 1. 세션에서 로그인 유저 정보 가져오기
     UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
 
     // 2. HomeServlet에서 전달받은 트랙 정보 가져오기
     TrackDTO track = (TrackDTO) request.getAttribute("track");
     
-    String title = "음악 로딩 중...";
-    String artist = "PickGok";
+    String title = "";
+    String artist = "";
     String musicUrl = "";
     String trackId = "";
 
     if (track != null) {
         title = track.getTitle();
         artist = track.getArtist();
-        // 웹 경로(Context Path) + 파일 경로 조합하여 오디오 URL 생성
         musicUrl = request.getContextPath() + track.getFilePath(); 
         trackId = String.valueOf(track.getTrackId());
     } else {
-        // 데이터가 없으면 다시 서블릿 호출 (데이터 로딩 실패 방지)
-        response.sendRedirect(request.getContextPath() + "/home");
-        return;
+        // [수정됨] 무한 리다이렉트 방지! 
+        // 데이터가 없을 때는 기본 메시지를 보여주거나, 리다이렉트를 하지 않습니다.
+        title = "재생할 곡이 없습니다.";
+        artist = "관리자에게 문의하세요.";
+        musicUrl = ""; // 빈 값
+        trackId = "0";
+        
+        // response.sendRedirect(...);  <-- 이 줄을 지우거나 주석 처리해야 루프가 멈춥니다.
     }
 %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>PickGok - Music Tinder</title>
+    <title>PickGok</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
     
@@ -52,7 +56,6 @@
             </a>
         </div>
         <ul class="nav-menu">
-            <li><a href="${pageContext.request.contextPath}/home"><i class="fa-solid fa-fire-flame-curved"></i> 음악 틴더</a></li>
             <li><a href="#"><i class="fa-solid fa-list-ul"></i> 내 재생 목록</a></li>
             <li><a href="#"><i class="fa-solid fa-calendar-day"></i> 오늘의 추천</a></li>
             

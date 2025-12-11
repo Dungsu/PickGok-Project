@@ -16,3 +16,7 @@ tqdm==4.66.3
 # --- Database (New) ---
 # Python에서 MySQL로 메타데이터를 밀어넣기 위해 필요
 mysql-connector-python>=8.0.0
+
+
+# --- Environment Management ---
+setuptools
